@@ -106,8 +106,8 @@ function DisabilityInsuranceComparison() {
         <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
           Disability Insurance for Resident Physicians
         </h1>
-        <p className="text-gray-700 text-center mb-8">
-          Choosing the right disability insurance is crucial as you transition to residency. This tool compares stepwise and flat-rate plans and explains key features.
+        <p className="text-gray-700 text-center italic mb-4">
+          Disclaimer: The information provided here is for educational purposes only and should not be considered financial or insurance advice. Please consult with a licensed insurance advisor to understand the best options for your specific situation.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-8">
@@ -161,7 +161,7 @@ function DisabilityInsuranceComparison() {
           Disability Insurance Comparison Tool
         </h2>
         <p className="text-gray-700 text-center mb-8">
-          Compare cumulative costs of stepwise vs. flat-rate plans. This is a simplified comparison; consult a qualified advisor.
+          Choosing the right disability insurance is crucial as you transition to residency. This tool compares stepwise and flat-rate plans and explains key features. Compare cumulative costs of stepwise vs. flat-rate plans. This is a simplified comparison; consult a qualified advisor. Please note that there are more considerations than simply financial considerations when deciding on a plan.
         </p>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
