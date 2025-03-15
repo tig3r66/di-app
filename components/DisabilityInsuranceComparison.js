@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useId } from 'react';
+import React, { useState, useMemo } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ReferenceLine } from 'recharts';
 import {
   CheckCircleIcon,
@@ -40,9 +40,6 @@ function DisabilityInsuranceComparison() {
   const [startAge, setStartAge] = useState(25);
   const [endAge, setEndAge] = useState(65);
 
-  // Generate a stable unique ID using React 18's useId hook
-  const chartId = useId();
-
   const getStepwisePremium = (age) => {
     for (const bracket of stepwiseBrackets) {
       if (age >= bracket.minAge && age <= bracket.maxAge) {
@@ -56,18 +53,15 @@ function DisabilityInsuranceComparison() {
     let cumulativeStepwise = 0;
     let cumulativeFlat = 0;
     const data = [];
-
     for (let age = startAge; age <= endAge; age++) {
       cumulativeStepwise += getStepwisePremium(age) * 12;
       cumulativeFlat += flatMonthlyPremium * 12;
-
       data.push({
         age,
         stepwise: +cumulativeStepwise.toFixed(2),
         flat: +cumulativeFlat.toFixed(2),
       });
     }
-
     return data;
   }, [startAge, endAge, stepwiseBrackets, flatMonthlyPremium]);
 
@@ -241,13 +235,7 @@ function DisabilityInsuranceComparison() {
                 <input
                   type="number"
                   value={startAge}
-                  onChange={(e) => {
-                    const newStartAge = parseInt(e.target.value) || 0;
-                    setStartAge(newStartAge);
-                    if (newStartAge > endAge) {
-                      setEndAge(newStartAge);
-                    }
-                  }}
+                  onChange={(e) => setStartAge(parseInt(e.target.value) || 0)}
                   className="border p-1 ml-2 w-16 rounded"
                 />
               </label>
@@ -256,13 +244,7 @@ function DisabilityInsuranceComparison() {
                 <input
                   type="number"
                   value={endAge}
-                  onChange={(e) => {
-                    const newEndAge = parseInt(e.target.value) || 0;
-                    setEndAge(newEndAge);
-                    if (newEndAge < startAge) {
-                      setStartAge(newEndAge);
-                    }
-                  }}
+                  onChange={(e) => setEndAge(parseInt(e.target.value) || 0)}
                   className="border p-1 ml-2 w-16 rounded"
                 />
               </label>
@@ -273,11 +255,7 @@ function DisabilityInsuranceComparison() {
             <h4 className="text-lg font-bold mb-2">Cumulative Premium Comparison</h4>
             <div className="w-full flex justify-center">
               <LineChart width={600} height={300} data={chartData}>
-                <CartesianGrid
-                  stroke="#ccc"
-                  strokeDasharray="5 5"
-                  clipPathId={`recharts-clip-${chartId}`}
-                />
+                <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
                 <XAxis dataKey="age" />
                 <YAxis />
                 <Tooltip />
